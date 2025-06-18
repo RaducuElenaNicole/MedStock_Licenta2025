@@ -11,7 +11,7 @@ function afiseazaAutentificare() {
     "Autentifică-te pentru a accesa platforma de gestionare a stocurilor de medicamente.";
 }
 
-// Signup
+// Signup 
 function signUp(event) {
   event.preventDefault();
 

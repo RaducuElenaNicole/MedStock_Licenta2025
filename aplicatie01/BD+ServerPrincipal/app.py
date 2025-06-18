@@ -1,5 +1,6 @@
 from flask import Flask, request, jsonify
 from flask_cors import CORS
+from werkzeug.security import generate_password_hash, check_password_hash
 import sqlite3
 import os
 
@@ -16,6 +17,7 @@ def signup():
         data = request.get_json(force=True)
         username = data.get("username")
         parola = data.get("parola")
+        parola_hash = generate_password_hash(parola)
 
         if not all([username, parola]):
             return jsonify({"success": False, "error": "Username și parola sunt necesare"}), 400
@@ -43,7 +45,7 @@ def signup():
             cursor.execute("""
                 INSERT INTO utilizator (nume, username, email, parola, rol, id_centru_medical)
                 VALUES (?, ?, ?, ?, ?, ?)
-            """, (nume, username, email, parola, rol, id_centru))
+            """, (nume, username, email, parola_hash, rol, id_centru))
 
             # Șterge din utilizator_pregatit
             cursor.execute("DELETE FROM utilizator_pregatit WHERE username = ?", (username,))
