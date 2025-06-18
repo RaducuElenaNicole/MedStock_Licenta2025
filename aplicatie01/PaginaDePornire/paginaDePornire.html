@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8">
+  <title>Autentificare - StockMed</title>
+
+  <link rel="stylesheet" href="style_pagPornire.css">
+</head>
+<body>
+
+  <div class="container">
+    <!-- Stânga: titlu și descriere -->
+    <div class="text-section">
+      <h1><strong>StockMed</strong></h1>
+      <p id="intro">Autentifică-te pentru a accesa platforma de gestionare a stocurilor de medicamente.</p>
+    </div>
+
+    <!-- Dreapta: formular -->
+    <div class="card" id="login-form">
+      <h2>Autentificare</h2>
+      <input type="text" id="login-username" placeholder="Utilizator" required>
+      <input type="password" id="login-password" placeholder="Parolă" required>
+      <button onclick="logIn(event)">Intră în cont</button>
+      <p>Nu ai cont? <a onclick="afiseazaInregistrare()">Înregistrează-te</a></p>
+    </div>
+
+    <form class="card" id="signup-form" style="display: none;" onsubmit="signUp(event)">
+      <h2>Înregistrare</h2>
+
+      <input type="text" id="signup-nume" placeholder="Intoduceți numele complet" required>
+      <input type="text" id="signup-username" placeholder="Intoduceți username-ul" required>
+      <input type="email" id="signup-email" placeholder="Intoduceți email-ul profesional" required>
+      
+      <select id="signup-rol" class="input-select" required>
+        <option value="" disabled selected>Alege tipul de utilizator</option>
+        <option value="user">Utilizator - Farmacist</option>
+        <option value="manager">Manager</option>
+        <option value="admin">Administrator</option>
+      </select>
+
+      <input type="password" id="signup-password" placeholder="Intoduceți o parolă" required>
+
+      <button onclick="signUp(event)">Creează cont</button>
+
+      <p>Ai deja cont? <a onclick="afiseazaAutentificare()">Autentifică-te</a></p>
+    </div>
+  </div>
+
+    <script src="conectare.js"></script>
+    
+</body>
+</html>

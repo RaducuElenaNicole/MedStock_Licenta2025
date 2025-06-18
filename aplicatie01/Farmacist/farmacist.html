@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ro">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Farmacist - StockMed</title>
+  <link rel="stylesheet" href="farmacist.css">
+</head>
+
+<body>
+  <div class="container">
+    <header>
+      <h1>Platforma StockMed</h1>
+      <h2 id="welcome-message">Bine ai venit!</h2>
+      <p class="rol">Rolul tău este: <strong>Farmacist</strong></p>
+      <button onclick="logout()">Deconectare</button>
+    </header>
+
+    <main>
+      <section>
+        <h3>Funcționalități disponibile:</h3>
+        <ul>
+          <li>Vizualizare stocuri disponibile</li>
+          <li>Raportare consum medicamente</li>
+          <li>Alerta expirare medicamente</li>
+          <li>Acces doar la unitatea asociată</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>Raportează un incident</h2>
+        <button onclick="afiseazaFormularIncident()">Raportează incident</button>
+
+        <form id="formularIncident" style="display: none; margin-top: 1rem;" onsubmit="trimiteIncident(event)">
+          <div class="formular-vertical">
+            <input type="text" id="incident-medicament" placeholder="Nume medicament" required>
+
+            <select id="incident-tip" required onchange="verificaTipAltceva()">
+              <option value="">Tip incident</option>
+              <option value="Lipsă">Lipsă</option>
+              <option value="Defect">Defect</option>
+              <option value="Alterat">Alterat</option>
+              <option value="Expirat">Expirat</option>
+              <option value="Altceva">Altceva...</option>
+            </select>
+
+            <input type="text" id="incident-altceva" placeholder="Descrie tipul incidentului" style="display:none;">
+            <textarea id="incident-descriere" placeholder="Descriere detaliată" required></textarea>
+            <button type="submit">Trimite incident</button>
+          </div>
+        </form>
+
+        <p id="incident-status"></p>
+      </section>
+
+
+    </main>
+  </div>
+
+  <script src="farmacist.js"></script>
+</body>
+
+</html>

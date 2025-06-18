@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?><sqlb_project><db path="" readonly="0" foreign_keys="" case_sensitive_like="" temp_store="" wal_autocheckpoint="" synchronous=""/><attached/><window><main_tabs open="browser pragmas query" current="2"/></window><tab_structure><column_width id="0" width="300"/><column_width id="1" width="0"/><column_width id="2" width="100"/><column_width id="3" width="2388"/><column_width id="4" width="0"/></tab_structure><tab_browse><table title="." custom_title="0" dock_id="5" table="0,0:"/><dock_state state="000000ff00000000fd00000001000000020000033b00000276fc0100000005fb000000160064006f0063006b00420072006f007700730065003101000000000000033b0000000000000000fb000000160064006f0063006b00420072006f007700730065003201000000000000033b0000000000000000fb000000160064006f0063006b00420072006f007700730065003301000000000000033b0000000000000000fb000000160064006f0063006b00420072006f007700730065003401000000000000033b0000000000000000fb000000160064006f0063006b00420072006f00770073006500350100000000ffffffff0000011800ffffff000002580000000000000004000000040000000800000008fc00000000"/><default_encoding codec=""/><browse_table_settings/></tab_browse><tab_sql><sql name="SQL 1*">PRAGMA foreign_keys = OFF;
+
+INSERT INTO centru_medical_nou (nume, adresa, oras, id_utilizator)
+SELECT nume, adresa, oras, id_utilizator FROM centru_medical;
+
+DROP TABLE centru_medical;
+ALTER TABLE centru_medical_nou RENAME TO centru_medical;
+
+PRAGMA foreign_keys = ON;
+
+
+PRAGMA table_info(centru_medical);
+</sql><current_tab id="0"/></tab_sql></sqlb_project>

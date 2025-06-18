@@ -1,0 +1,191 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f7fa;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: #0074D9;
+    color: white;
+    padding: 1rem;
+    text-align: center;
+}
+
+nav {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    background-color: #eee;
+    padding: 0.5rem;
+}
+
+button {
+    padding: 0.5rem 1rem;
+    background-color: #0074D9;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+button:hover {
+    background-color: #005fa3;
+}
+
+main {
+    padding: 1rem;
+}
+
+.sectiune {
+    margin-top: 1rem;
+    padding: 1rem;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 0 5px rgba(0,0,0,0.1);
+}
+
+td button {
+    background-color: #0074D9;
+    color: white;
+    border: none;
+    padding: 4px 8px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+td button:hover {
+    background-color: #005fa3;
+}
+
+.tabel-general {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1rem;
+    font-size: 14px;
+    border: 1px solid #ccc;
+}
+
+.tabel-general th, .tabel-general td {
+    border: 1px solid #ccc;
+    padding: 8px 12px;
+    text-align: left;
+}
+
+.tabel-general tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.tabel-general tbody tr:nth-child(odd) {
+    background-color: #ffffff;
+}
+
+.tabel-general tbody tr:hover {
+    box-shadow: 0 0 6px rgba(0, 116, 217, 0.7);
+    transform: scale(1.002);
+    transition: all 0.2s ease-in-out;
+    background-color: #e8f4ff;
+}
+
+#formularEditare {
+  background-color: #ffffff;
+  border-radius: 12px;
+  padding: 20px;
+  max-width: 500px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  margin-top: 1rem;
+}
+
+#formularEditare label {
+  font-weight: 600;
+  display: block;
+  margin-top: 10px;
+}
+
+#formularEditare input,
+#formularEditare select {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  margin-top: 4px;
+  margin-bottom: 12px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  transition: box-shadow 0.3s, border-color 0.3s;
+}
+
+#formularEditare input:focus,
+#formularEditare select:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+#formularEditare button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  font-size: 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+#formularEditare button:hover {
+  background-color: #0056b3;
+}
+
+#editareMesaj {
+  margin-top: 10px;
+  font-weight: bold;
+}
+
+#formularCreareUtilizator {
+  background-color: #ffffff;
+  border-radius: 12px;
+  padding: 20px;
+  max-width: 500px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  margin-top: 1rem;
+}
+
+#formularCreareUtilizator label {
+  font-weight: 600;
+  display: block;
+  margin-top: 10px;
+}
+
+#formularCreareUtilizator input,
+#formularCreareUtilizator select {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  margin-top: 4px;
+  margin-bottom: 12px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  transition: box-shadow 0.3s, border-color 0.3s;
+}
+
+#formularCreareUtilizator input:focus,
+#formularCreareUtilizator select:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+#formularCreareUtilizator button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  font-size: 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+#formularCreareUtilizator button:hover {
+  background-color: #0056b3;
+}

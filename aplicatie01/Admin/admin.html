@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <title>Panou Administrator</title>
+    <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+    <header>
+        <h1>Panou Administrator</h1>
+    </header>
+
+    <section id="sectiuneBunVenit" class="sectiune">
+       <h2>Bine ai venit, <span id="numeUser"></span>!</h2>
+    </section>
+
+    <nav>
+        <button onclick="afiseazaSectiune('gestionareUtilizatori')">Gestionare utilizatori</button>
+        <button onclick="afiseazaSectiune('unitatiMedicale')">Unități medicale</button>
+        <button onclick="afiseazaSectiune('monitorizare')">Monitorizare activitate</button>
+        <button onclick="afiseazaSectiune('probleme')">Intervenții/Probleme</button>
+        <button onclick="logout()">Deconectare</button>
+    </nav>
+
+    <main>
+        <section id="gestionareUtilizatori" class="sectiune"  style="display: none;">
+            <h2>Gestionare utilizatori</h2>
+
+            <button onclick="afiseazaTabelUtilizatori()">Vezi toți utilizatorii</button>
+            <button onclick="afiseazaFormularEditare()">Editează utilizator</button>
+            <button onclick="afiseazaFormularCreareUtilizator()">Creează utilizator</button>
+
+            <form id="formularEditare" style="display: none;" onsubmit="handleEditareUtilizator(event)">
+                <label for="select-utilizator-edit">Selectează utilizator:</label><br>
+                <select id="select-utilizator-edit" required></select><br><br>
+
+                <label for="edit-nume">Nume:</label><br>
+                <input type="text" id="edit-nume" required><br><br>
+
+                <label for="edit-email">Email:</label><br>
+                <input type="email" id="edit-email" required><br><br>
+
+                <label for="edit-rol">Rol:</label><br>
+                <select id="edit-rol" required>
+                  <option value="user">Farmacist</option>
+                  <option value="manager">Manager</option>
+                </select><br><br>
+
+                <label for="edit-centru">Centru medical asociat:</label><br>
+                <select id="edit-centru">
+                    <option value="">-- Fără asociere --</option>
+                </select><br><br>
+
+                <button type="submit">Salvează modificările</button>
+                <p id="editareMesaj"></p>
+            </form>
+            
+            <div id="filtru-centru-wrapper" style="margin-top: 1rem; display: none;">
+                <label for="filtru-centru">Filtru după centru medical:</label>
+                <select id="filtru-centru" onchange="filtreazaDupaCentru()">
+                    <option value="tot">Toate centrele</option>
+                    <option value="fara">Fără asociere</option>
+                </select>
+
+                <label for="filtru-rol">Filtru după rol:</label>
+                <select id="filtru-rol" onchange="aplicaFiltre()">
+                    <option value="tot">Toți</option>
+                    <option value="manager">Manager</option>
+                    <option value="user">Farmacist</option>
+                </select>
+            </div>
+
+
+            <table id="tabelUtilizatori" class="tabel-general" style="display: none;">
+                <thead>
+                <tr>
+                  <th>Nume complet</th>
+                  <th>Username</th>
+                  <th>Email</th>
+                  <th>Rol</th>
+                  <th>Centru Medical</th>
+                  <th>Acțiuni</th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+
+            <form id="formularCreareUtilizator"  class="formular-user" style="display: none; margin-top: 1rem;" onsubmit="creeazaUtilizatorNou(event)">
+                <label for="nume-nou">Nume complet:</label><br>
+                <input type="text" id="nume-nou" required><br><br>
+
+                <label for="username-nou">Username:</label><br>
+                <input type="text" id="username-nou" required><br><br>
+
+                <label for="email-nou">Email:</label><br>
+                <input type="email" id="email-nou" required><br><br>
+
+                <label for="rol-nou">Rol:</label><br>
+                <select id="rol-nou" required onchange="afiseazaSelectCentru()">
+                  <option value="">-- Alege un rol --</option>
+                  <option value="user">Farmacist</option>
+                  <option value="manager">Manager</option>
+                </select><br><br>
+
+                <div id="camp-centru" style="display: none;">
+                  <label for="centru-nou">Centru medical:</label><br>
+                  <select id="centru-nou" required></select><br><br>
+                </div>
+
+                <button type="submit">Salvează utilizatorul</button>
+                <p id="mesajCreareUtilizator"></p>
+              </form>
+
+        </section>
+
+        <section id="unitatiMedicale" class="sectiune" style="display: none;">
+            <h2>Centre medicale</h2>
+
+            <button onclick="afiseazaFormularCentru()">Adaugă centru medical</button>
+            <button onclick="vizualizeazaCentre()">Vizualizează unitățile medicale</button>
+
+            <form id="formularCentru" style="display: none; margin-top: 1rem;">
+                <label for="nume">Nume centru medical:</label><br>
+                <input type="text" id="nume" name="nume" required><br><br>
+
+                <label for="adresa">Adresă:</label><br>
+                <input type="text" id="adresa" name="adresa" required><br><br>
+
+                <label for="oras">Oraș:</label><br>
+                <input type="text" id="oras" name="oras" required><br><br>
+
+                <button type="submit">Salvează</button>
+            </form>
+        <p id="mesajCentru" style="margin-top: 1rem;"></p>
+
+        <table id="tabelCentre" class="tabel-general" style="margin-top: 1rem; display: none;">
+            <thead>
+                <tr>
+                    <th>Nume</th>
+                    <th>Adresă</th>
+                    <th>Oraș</th>
+                    <th>Acțiuni</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </section>
+
+        <section id="monitorizare" class="sectiune" style="display: none;">
+            <h2>Monitorizare activitate</h2>
+            <p>Accesează jurnale de activitate și statistici.</p>
+        </section>
+
+        <section id="probleme" class="sectiune" style="display: none;">
+            <h2>Intervenții și raportări</h2>
+            <p>Rezolvă problemele raportate de utilizatori.</p>
+        </section>
+    </main>
+
+    <script src="admin.js"></script>
+</body>
+</html>
