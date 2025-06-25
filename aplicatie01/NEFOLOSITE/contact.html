@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8">
+  <title>Contact - StockMed</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>Contact</h1>
+  </header>
+
+  <main>
+    <p>Ai sugestii sau întrebări? Trimite-ne un mesaj:</p>
+
+    <form onsubmit="trimite(event)">
+      <input type="text" id="nume" placeholder="Numele tău" required>
+      <input type="email" id="email" placeholder="Adresa de email" required>
+      <textarea id="mesaj" placeholder="Mesajul tău..." rows="5" required></textarea>
+      <button type="submit">Trimite</button>
+    </form>
+
+    <p id="confirmare"></p>
+
+    <a href="index.html">Înapoi la pagina principală</a>
+  </main>
+
+  <script>
+    function trimite(event) {
+      event.preventDefault();
+      document.getElementById('confirmare').innerText = "Mulțumim pentru mesaj! (aceasta este o simulare)";
+    }
+  </script>
+</body>
+</html>

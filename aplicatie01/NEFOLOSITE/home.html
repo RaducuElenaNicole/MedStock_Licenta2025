@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8">
+  <title>Bine ai venit</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h1>Bun venit, <span id="utilizator"></span>!</h1>
+  <button onclick="logOut()">Deconectare</button>
+  <script src="auth.js"></script>
+  <script>
+    document.getElementById("utilizator").innerText = localStorage.getItem("loggedInUser") || "Utilizator necunoscut";
+    if (!localStorage.getItem("loggedInUser")) {
+      window.location.href = "login.html";
+    }
+  </script>
+</body>
+</html>

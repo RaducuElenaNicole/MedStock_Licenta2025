@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8">
+  <title>Gestionare Stoc - StockMed</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header><h1>Stoc Medicamente</h1></header>
+
+  <main>
+    <h2>Adaugă Medicament</h2>
+    <form onsubmit="adaugaMedicament(event)">
+      <input type="text" id="nume" placeholder="Denumire" required>
+      <input type="text" id="lot" placeholder="Lot" required>
+      <input type="date" id="expirare" required>
+      <input type="number" id="cantitate" placeholder="Cantitate" required>
+      <button type="submit">Adaugă</button>
+    </form>
+
+    <h2>Stoc Curent</h2>
+    <table border="1" style="margin: auto;">
+      <thead>
+        <tr>
+            <th>Denumire</th>
+            <th>Lot</th>
+            <th>Expirare</th>
+            <th>Cantitate</th>
+            <th>Avertisment</th>
+            <th>Șterge</th>
+          </tr>
+    </thead>
+
+      <tbody id="tabelStoc"></tbody>
+    </table>
+
+    <a href="index.html">Înapoi la pagina principală</a>
+  </main>
+
+  <script src="stoc.js"></script>
+</body>
+</html>

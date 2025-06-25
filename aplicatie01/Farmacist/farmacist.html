@@ -13,27 +13,41 @@
       <h1>Platforma StockMed</h1>
       <h2 id="welcome-message">Bine ai venit!</h2>
       <p class="rol">Rolul tău este: <strong>Farmacist</strong></p>
+
+
       <button onclick="logout()">Deconectare</button>
+      <button id="btnConsumNou" onclick="afiseazaFormularConsum()">Consum nou</button>
+      <button id="btnIncidentNou" onclick="afiseazaFormularIncident()">Raportează incident</button>
     </header>
 
     <main>
-      <section>
-        <h3>Funcționalități disponibile:</h3>
-        <ul>
-          <li>Vizualizare stocuri disponibile</li>
-          <li>Raportare consum medicamente</li>
-          <li>Alerta expirare medicamente</li>
-          <li>Acces doar la unitatea asociată</li>
-        </ul>
+      <section id="sectiuneConsum">
+        <div id="containerConsum" class="formular-vertical">
+          <form id="formularConsum">
+            <label for="id_medicament">Alege medicamentul:</label>
+            <select id="id_medicament" name="id_medicament" required>
+              <option value="">Selectează medicamentul</option>
+            </select>
+
+            <label for="data_consum">Data consum:</label>
+            <input type="date" id="data_consum" name="data_consum" required>
+
+            <label for="cantitate">Cantitate consumată:</label>
+            <input type="number" id="cantitate" name="cantitate" required>
+
+            <button type="submit">Salvează consum</button>
+          </form>
+          <p id="mesajConsum" style="margin-top: 1rem;"></p>
+        </div>
       </section>
 
       <section>
-        <h2>Raportează un incident</h2>
-        <button onclick="afiseazaFormularIncident()">Raportează incident</button>
-
-        <form id="formularIncident" style="display: none; margin-top: 1rem;" onsubmit="trimiteIncident(event)">
-          <div class="formular-vertical">
-            <input type="text" id="incident-medicament" placeholder="Nume medicament" required>
+        <form id="formularIncident" style="margin-top: 1rem;" onsubmit="trimiteIncident(event)">
+          <div id="containerIncident" class="formular-vertical">
+            <label for="incident-medicament">Alege medicamentul:</label>
+            <select id="incident-medicament" name="incident-medicament" required>
+              <option value="">Selectează medicamentul</option>
+            </select>
 
             <select id="incident-tip" required onchange="verificaTipAltceva()">
               <option value="">Tip incident</option>
@@ -49,8 +63,7 @@
             <button type="submit">Trimite incident</button>
           </div>
         </form>
-
-        <p id="incident-status"></p>
+        <p id="mesajIncident"></p>
       </section>
 
 

@@ -1,10 +1,13 @@
 <!DOCTYPE html>
 <html lang="ro">
+
 <head>
   <meta charset="UTF-8">
   <title>Manager Stocuri - StockMed</title>
   <link rel="stylesheet" href="manager.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
+
 <body>
   <div class="container">
     <header>
@@ -19,9 +22,12 @@
         <h3>Acțiuni disponibile</h3>
         <button onclick="afiseazaFormularAdaugare()">Adaugă medicament</button>
         <button onclick="afiseazaFormularLot()">Adaugă lot nou</button>
+        <button onclick="afiseazaFormularActualizare()">Actualizare detalii medicament</button>
         <button onclick="afiseazaMedicamenteCuStergere()">Vezi toate medicamentele</button>
-        <button onclick="genereazaRaport()">Generează raport</button>
-        <button onclick="afiseazaDashboard()">Dashboard</button>
+        <button onclick="afiseazaPreviziuni()">Previziuni & Reaprovizionare</button>
+        <button onclick="afiseazaRaportStocuri()">Vezi stocurile actuale</button>
+        <button onclick="afiseazaRaportLoturi()">Vezi stoc pe loturi</button>
+        <button onclick="afiseazaClasificare()">Analiză ABC-XYZ</button>
       </section>
 
       <section id="formular-adaugare-medicament" style="display: none;">
@@ -51,20 +57,150 @@
         <ul id="medicamente-lista"></ul>
       </section>
 
-      <section id="dashboard" style="display: none;">
-        <h3>Dashboard</h3>
-        <p>(Va conține: medicamente critice, grafice consum, rapoarte, etc.)</p>
+      <section id="previziuni"
+        style="display: none; background-color: #f9f9f9; padding: 20px; margin-top: 20px; border-radius: 10px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
+        <h3>Previziuni de consum</h3>
+
+        <label for="medicament-previziune">Selectează medicamentul:</label>
+        <select id="medicament-previziune">
+          <option value="">Selectează medicamentul</option>
+        </select>
+
+        <button onclick="calculeazaPreviziuni()">Calculează previziuni</button>
+        <p id="rezultat-previziuni"></p>
+
+        <canvas id="grafic-consum" width="600" height="300" style="margin-top: 20px;"></canvas>
       </section>
+
+      <section id="raport-stocuri" style="display: none;">
+        <h3>Stoc actual pe medicamente</h3>
+        <table id="tabel-stocuri">
+          <thead>
+            <tr>
+              <th>Medicament</th>
+              <th>Cantitate totală (Nr. cutii)</th>
+              <th>Cantitate totală (Nr. comprimate)</th>
+              <th>Cea mai apropiată expirare</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </section>
+
+      <section id="clasificare-abcxyz" style="display: none;">
+        <h3>Clasificare ABC - XYZ</h3>
+        <table id="tabel-abcxyz" class="tabel-stoc">
+          <thead>
+            <tr>
+              <th>Medicament</th>
+              <th>Total consum</th>
+              <th>Deviație</th>
+              <th>Clasificare ABC</th>
+              <th>Clasificare XYZ</th>
+              <th>Clasificare combinată</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+
+        <button onclick="exportaClasificare()">Exportă raport PDF</button>
+
+        <!-- Explicația ascunsă inițial -->
+        <div id="explicatie-clasificare"
+          style="display: none; margin-top: 20px; padding: 15px; background: #f7f7f7; border-radius: 10px;">
+          <h4>Legendă clasificare ABC - XYZ:</h4>
+          <p><strong>Clasificare ABC (valoare economică totală):</strong></p>
+          <ul>
+            <li><strong>A:</strong> Produse critice, consum &gt; 1000 unități.</li>
+            <li><strong>B:</strong> Consum moderat (500 - 1000).</li>
+            <li><strong>C:</strong> Consum redus (&lt; 500).</li>
+          </ul>
+          <p><strong>Clasificare XYZ (stabilitatea cererii):</strong></p>
+          <ul>
+            <li><strong>X:</strong> Stabil (deviație ≤ 20).</li>
+            <li><strong>Y:</strong> Sezonier (deviație 21–50).</li>
+            <li><strong>Z:</strong> Imprevizibil (&gt; 50).</li>
+          </ul>
+        </div>
+      </section>
+
+      <section id="raport-loturi" style="display: none; margin-top: 40px;">
+        <h3 style="text-align: center;">Stoc detaliat pe loturi</h3>
+
+        <div style="text-align: center; margin-bottom: 20px;">
+          <select id="filtru-medicament" onchange="filtreazaTabelLoturi()"
+            style="padding: 10px; border-radius: 8px; font-size: 16px; width: 300px; margin-right: 20px;">
+            <option value="">Toate medicamentele</option>
+          </select>
+
+          <select id="filtru-expirare" onchange="filtreazaTabelLoturi()"
+            style="padding: 10px; border-radius: 8px; margin-left: 20px; font-size: 16px;">
+            <option value="">Toate expirările</option>
+            <option value="expirate">Expirate</option>
+            <option value="7zile">Expiră în 7 zile</option>
+            <option value="21zile">Expiră în 21 zile</option>
+          </select>
+        </div>
+
+        <table id="tabel-loturi" class="tabel-stoc">
+          <thead>
+            <tr>
+              <th>Medicament</th>
+              <th>Data introducere lot</th>
+              <th>Cantitate (cutii)</th>
+              <th>Cantitate (comprimate)</th>
+              <th>Data expirare</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </section>
+
+      <section id="formular-actualizare-medicament" style="display: none; margin-top: 20px;">
+        <h3>Actualizare detalii medicament</h3>
+
+        <label>Medicament:</label>
+        <select id="medicament-select" onchange="incarcaDetaliiMedicament()">
+          <option value="">Selectează medicamentul</option>
+        </select>
+
+        <label>Nume:</label>
+        <input type="text" id="med-nume-update">
+
+        <label>Categorie:</label>
+        <input type="text" id="med-categorie-update">
+
+        <label>Substanțe active:</label>
+        <input type="text" id="med-substante-update">
+
+        <label>Bucăți per cutie:</label>
+        <input type="number" id="med-bucati-update">
+
+        <h4>Actualizare lot:</h4>
+
+        <label>Lot:</label>
+        <select id="lot-select">
+          <option value="">Selectează lotul</option>
+        </select>
+
+        <label>Cantitate cutii:</label>
+        <input type="number" id="lot-cantitate-update">
+
+        <button onclick="salveazaActualizare()">Salvează modificările</button>
+      </section>
+
 
     </main>
   </div>
 
-  <section id="popup-stergere" style="display: none; background-color: white; border-radius: 15px; padding: 20px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); margin-top: 20px;">
-    
+  <section id="popup-stergere"
+    style="display: none; background-color: white; border-radius: 15px; padding: 20px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); margin-top: 20px;">
+
     <div style="text-align: right;">
-      <button onclick="anuleazaStergere()" style="border: none; background: none; font-size: 18px; cursor: pointer;">✖️</button>
+      <button onclick="anuleazaStergere()"
+        style="border: none; background: none; font-size: 18px; cursor: pointer;">✖️</button>
     </div>
-    
+
     <h3>Confirmare ștergere</h3>
     <p id="medicament-de-sters"></p>
     <textarea id="motiv-stergere" placeholder="Scrie motivul ștergerii..." required></textarea><br>
@@ -74,4 +210,5 @@
 
   <script src="manager.js"></script>
 </body>
+
 </html>

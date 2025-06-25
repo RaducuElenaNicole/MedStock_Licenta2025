@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8">
+  <title>Simulare EOQ - StockMed</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>Calculator EOQ</h1>
+  </header>
+
+  <main>
+    <p>Completează valorile pentru a calcula cantitatea optimă de comandat (EOQ):</p>
+
+    <input type="number" id="d" placeholder="Cerere lunară (D)">
+    <input type="number" id="s" placeholder="Cost pe comandă (S)">
+    <input type="number" id="h" placeholder="Cost de stocare/unitate (H)">
+    
+    <button onclick="calculeaza()">Calculează</button>
+    
+    <p id="rezultat"></p>
+
+    <a href="index.html">Înapoi la pagina principală</a>
+  </main>
+
+  <script>
+    function calculeaza() {
+      const D = parseFloat(document.getElementById('d').value);
+      const S = parseFloat(document.getElementById('s').value);
+      const H = parseFloat(document.getElementById('h').value);
+
+      if (isNaN(D) || isNaN(S) || isNaN(H) || D <= 0 || S <= 0 || H <= 0) {
+        document.getElementById('rezultat').innerText = "Te rugăm să introduci valori valide.";
+        return;
+      }
+
+      const eoq = Math.sqrt((2 * D * S) / H).toFixed(2);
+      const comenziAn = (12 * D / eoq).toFixed(1);
+
+      document.getElementById('rezultat').innerText = 
+        `Comandă optimă: ${eoq} unități. Comenzi estimate/an: ${comenziAn}.`;
+    }
+  </script>
+</body>
+</html>

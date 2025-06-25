@@ -119,3 +119,129 @@ section {
   border-color: #007bff;
   outline: none;
 }
+
+.card-previziuni {
+  background-color: #ffffff;
+  padding: 30px;
+  margin-top: 30px;
+  border-radius: 15px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+
+.card-previziuni h2 {
+  color: #0074D9;
+  margin-bottom: 20px;
+}
+
+.selectare-medicament label {
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.selectare-medicament select {
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  width: 60%;
+  margin-top: 10px;
+}
+
+.selectare-medicament button {
+  padding: 10px 30px;
+  font-size: 16px;
+  background-color: #0074D9;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-top: 20px;
+}
+
+.selectare-medicament button:hover {
+  background-color: #005fa3;
+}
+
+#rezultat-previziuni {
+  font-size: 18px;
+  line-height: 1.5;
+  margin-top: 20px;
+}
+
+.critic {
+  color: red;
+  font-weight: bold;
+}
+
+#tabel-stocuri {
+  border-collapse: collapse;
+  width: 80%;
+  margin: auto;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+#tabel-stocuri th, #tabel-stocuri td {
+  padding: 15px;
+  text-align: center;
+  font-size: 16px;
+  border-bottom: 1px solid #ddd;
+}
+
+#tabel-stocuri tr:hover {
+  box-shadow: 0 0 15px rgba(0, 119, 255, 0.3);
+  transition: 0.3s;
+}
+
+.tabel-stoc {
+  border-collapse: collapse;
+  width: 90%;
+  margin: 20px auto;
+  background-color: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+  overflow: hidden;
+}
+
+.tabel-stoc th, .tabel-stoc td {
+  padding: 15px;
+  text-align: center;
+  border-bottom: 1px solid #ddd;
+  font-size: 16px;
+}
+
+.tabel-stoc tr:hover {
+  box-shadow: 0 0 15px rgba(0, 119, 255, 0.3);
+  transition: 0.3s;
+}
+
+.tabel-stoc {
+  border-collapse: collapse;
+  width: 95%;
+  margin: 20px auto;
+  background-color: white;
+  border-radius: 15px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+  overflow: hidden;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.tabel-stoc th, .tabel-stoc td {
+  padding: 15px 25px;
+  text-align: center;
+  border-bottom: 1px solid #ddd;
+  font-size: 16px;
+}
+
+.tabel-stoc thead {
+  background-color: #0074D9;
+  color: white;
+}
+
+.tabel-stoc tr:hover {
+  box-shadow: 0 0 15px rgba(0, 119, 255, 0.3);
+  transition: 0.3s;
+}
